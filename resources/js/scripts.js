@@ -40,7 +40,12 @@ for (let i=0; i<data.length; ++i) {
 
     
 
-    
+    const all_items_button = Array.from(document.querySelectorAll('button'))
+
+    all_items_button.forEach(elt => elt.addEventListener('click', () => {
+        addItem(elt.getAttribute('id'), elt.getAttribute('data-price'))
+        showItems()
+      }))
 
     
     function addItem(name, price) {
@@ -59,7 +64,7 @@ for (let i=0; i<data.length; ++i) {
 
     function showItems() {
         
-        itemList.innerHTML = '<li> Hello World</li>'
+    
 
       let itemStr = ''
 
@@ -71,10 +76,12 @@ for (let i=0; i<data.length; ++i) {
         console.log(`${cart[i].name}`)
 
         const { name, price, qty } = cart[i]
-        itemStr += `<li> ${name} $${price} x ${qty} = $${qty * price}<li>`
+        itemStr += `<li> ${name} $${price} x ${qty} = $${qty * price}</li>`
       }
 
       itemList.innerHTML = itemStr
+      cartQty.innerHTML = `Total in cart: $${getTotal()}`
+        cartTotal.innerHTML = `You have ${getQty()} items in your cart`
     }
 
     function getQty() {
@@ -113,9 +120,8 @@ for (let i=0; i<data.length; ++i) {
         }
     }
 
-    addItem('Apple', 0.99)
+    
     
     
     showItems()
-    cartQty.innerHTML = `Total in cart: $${getTotal()}`
-    cartTotal.innerHTML = `You have ${getQty()} items in your cart`
+    
