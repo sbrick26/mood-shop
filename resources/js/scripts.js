@@ -1,4 +1,6 @@
 const itemsContainer = document.getElementById('items')
+
+
 import data from './data.js'
 
 for (let i=0; i<data.length; ++i) {
@@ -32,6 +34,13 @@ for (let i=0; i<data.length; ++i) {
 }
 
     const cart = []
+    const itemList = document.getElementById('item-list')
+    const cartQty = document.getElementById('cart-qty')
+    const cartTotal = document.getElementById('cart-total')
+
+    
+
+    
 
     
     function addItem(name, price) {
@@ -49,9 +58,10 @@ for (let i=0; i<data.length; ++i) {
     }
 
     function showItems() {
-      
+        
+        itemList.innerHTML = '<li> Hello World</li>'
 
-      
+      let itemStr = ''
 
       console.log(`Total in cart: $${getTotal()}`)
       
@@ -59,7 +69,12 @@ for (let i=0; i<data.length; ++i) {
 
       for (let i = 0; i < cart.length; i +=1) {
         console.log(`${cart[i].name}`)
+
+        const { name, price, qty } = cart[i]
+        itemStr += `<li> ${name} $${price} x ${qty} = $${qty * price}<li>`
       }
+
+      itemList.innerHTML = itemStr
     }
 
     function getQty() {
@@ -89,7 +104,7 @@ for (let i=0; i<data.length; ++i) {
                     cart[i].qty -= qty
                 }
                
-                if (carti[i].qty < 1 || qty === 0) {
+                if (cart[i].qty < 1 || qty === 0) {
                     cart.splice(i, 1)
                 }
                 
@@ -99,6 +114,8 @@ for (let i=0; i<data.length; ++i) {
     }
 
     addItem('Apple', 0.99)
-    removeItem('Apple')
+    
     
     showItems()
+    cartQty.innerHTML = `Total in cart: $${getTotal()}`
+    cartTotal.innerHTML = `You have ${getQty()} items in your cart`
